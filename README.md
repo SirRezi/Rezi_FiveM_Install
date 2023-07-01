@@ -1,35 +1,34 @@
-# FiveM mit TxAdmin - Installationsanleitung Skript by SirRezi
 
-Dieses Skript ermöglicht die einfache Installation von FiveM mit TxAdmin auf einem Root-Server. Es wurde von SirRezi erstellt und automatisiert den Installationsprozess, um Ihnen Zeit und Aufwand zu ersparen.
+# FiveM with TxAdmin - Installation Guide Script by SirRezi
+This script enables easy installation of FiveM with TxAdmin on a root server. It was created by SirRezi and automates the installation process to save you time and effort.
 
-## Voraussetzungen
+## Prerequisites:
+A root server with Ubuntu or a compatible Linux distribution
+Internet connection
 
-- Ein Root-Server mit Ubuntu oder einer kompatiblen Linux-Distribution
-- Internetverbindung
+## Installation Steps:
+1. Download the installation script:
 
-## Installationsschritte
+2. Give executable permissions to the script:
 
-1. Lade das Installations-Skript herunter:
+ ```bash
+chmod +x ReziInstall.sh
+```
+Run the script.
 
-2. Geben Sie dem Skript Ausführungsrechte:
-   ```bash
-   chmod +x ReziInstall.sh
+ ```bash
+./ReziInstall.sh
+```
+## Installation Directory:
+The installation directory for FiveM and TxAdmin is set to /home/FiveM by default. If you wish to change this, edit the corresponding path in the file.
 
-3. Führe das Skript aus.
-   ```bash
-   ./ReziInstall.sh
+## Notes:
+This script was created by SirRezi and automates the installation process of FiveM with TxAdmin. Make sure to run it on a trusted system and review the code before using it.
 
+Note that the automated installation of FiveM with TxAdmin adheres to the general requirements, but specific customizations and configurations may be necessary to meet your server's individual needs.
 
-## Installationsverzeichnis:
-Das Installationsverzeichnis für FiveM und TxAdmin wird standardmäßig auf /home/FiveM festgelegt. Wenn Sie dies ändern möchten, bearbeiten Sie den entsprechenden Pfad in der Datei.
+Make sure to comply with the licensing terms of FiveM and TxAdmin before installing and using them.
 
-## Hinweise
-Dieses Skript wurde von SirRezi erstellt und automatisiert den Installationsprozess von FiveM mit TxAdmin. Stellen Sie sicher, dass Sie es auf einem vertrauenswürdigen System ausführen und prüfen Sie den Code vor der Verwendung.
-
-Beachten Sie, dass die automatisierte Installation von FiveM mit TxAdmin den allgemeinen Anforderungen entspricht. Es können jedoch spezifische Anpassungen und Konfigurationen erforderlich sein, um den individuellen Bedürfnissen Ihres Servers gerecht zu werden.
-
-Stellen Sie sicher, dass Sie die Lizenzbedingungen für FiveM und TxAdmin einhalten, bevor Sie sie installieren und verwenden.
-
-## Weitere Informationen
+## Further Information:
 FiveM: https://fivem.net
 TxAdmin: https://github.com/tabarra/txAdmin
