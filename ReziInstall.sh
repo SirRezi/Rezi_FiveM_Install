@@ -3,7 +3,7 @@
 # Farbdefinitionen
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Keine Farbe
 
 # Begrüßungsnachricht
 echo -e "${YELLOW}=====================================================${NC}"
@@ -37,9 +37,8 @@ cd /home/FiveM/server
 
 # FiveM-Server herunterladen und entpacken
 echo -e "${YELLOW}Lade FiveM-Server herunter...${NC}"
-wget https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/6537-f2c6ed5f64cc5a71ca0d9505f9b72bb015d370d6/fx.tar.xz
+wget https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/7257-030778a167242f79e0f59cd8d9c04b970e3b75c2/fx.tar.xz
 tar xf fx.tar.xz
-ls
 rm fx.tar.xz
 
 # FiveM-Server-Daten-Verzeichnis erstellen und konfigurieren
