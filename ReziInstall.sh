@@ -29,7 +29,18 @@ check_for_update() {
     fi
 }
 
+run_updated_script() {
+    echo -e "${YELLOW}=====================================================${NC}"
+    echo -e "${YELLOW}============ FiveM mit TxAdmin Installer ============${NC}"
+    echo -e "${YELLOW}=====================================================${NC}"
+    echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
+    echo
+
+}
+
 check_for_update
+
+run_updated_script
 
 
 echo -e "${YELLOW}=====================================================${NC}"
