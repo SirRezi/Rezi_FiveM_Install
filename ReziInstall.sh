@@ -17,7 +17,6 @@ update_script() {
     echo -e "${BLUE}=====================================================${NC}"
     echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
     echo
-    # Rest des Skripts nach dem Update...
 }
 
 check_for_update() {
