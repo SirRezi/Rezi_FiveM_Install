@@ -29,7 +29,7 @@ check_for_update() {
         echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
         sleep 3
         update_script
-        exit 0  # Hinzugefügt, um das Skript nach dem Update zu beenden
+        exit 0  
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
     fi
