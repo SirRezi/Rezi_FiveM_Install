@@ -27,7 +27,6 @@ check_for_update() {
             echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
             sleep 3
             update_script
-            exit 0
         else
             echo -e "${YELLOW}Du hast das Update abgelehnt. Das Skript ist auf dem neuesten Stand.${NC}"
         fi
@@ -37,6 +36,7 @@ check_for_update() {
 }
 
 check_for_update
+
 echo -e "${YELLOW}=====================================================${NC}"
 echo -e "${YELLOW}============ FiveM mit TxAdmin Installer ============${NC}"
 echo -e "${YELLOW}=====================================================${NC}"
