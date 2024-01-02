@@ -1,6 +1,7 @@
 #!/bin/bash
 
 GREEN='\033[0;32m'
+BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
@@ -10,53 +11,47 @@ update_script() {
     script="ReziInstall.sh"
     curl -sLO "https://raw.githubusercontent.com/$repo/main/$script"
     chmod +x $script
-    ./$script
-    exit 0
+    # Führe das aktualisierte Skript aus
+    echo -e "${BLUE}=====================================================${NC}"
+    echo -e "${BLUE}============ FiveM mit TxAdmin Installer ============${NC}"
+    echo -e "${BLUE}=====================================================${NC}"
+    echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
+    echo
+    # Rest des Skripts nach dem Update...
 }
 
 check_for_update() {
     echo -e "${YELLOW}Überprüfe auf Updates...${NC}"
     repo="SirRezi/Rezi_FiveM_Install"
     script="ReziInstall.sh"
-    local_version=$(<$script grep -m 1 'Version: ' | awk '{print $2}')
+    local_version=$(<"$script" grep -m 1 'Version: ' | awk '{print $2}')
     latest_version=$(curl -s "https://api.github.com/repos/$repo/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [ "$local_version" != "$latest_version" ]; then
         echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
         sleep 3
         update_script
+        exit 0  # Hinzugefügt, um das Skript nach dem Update zu beenden
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
     fi
 }
 
-run_updated_script() {
-    echo -e "${YELLOW}=====================================================${NC}"
-    echo -e "${YELLOW}============ FiveM mit TxAdmin Installer ============${NC}"
-    echo -e "${YELLOW}=====================================================${NC}"
-    echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
-    echo
-
-}
-
 check_for_update
 
-run_updated_script
-
-
-echo -e "${YELLOW}=====================================================${NC}"
-echo -e "${YELLOW}============ FiveM mit TxAdmin Installer ============${NC}"
-echo -e "${YELLOW}=====================================================${NC}"
+echo -e "${BLUE}=====================================================${NC}"
+echo -e "${BLUE}============ FiveM mit TxAdmin Installer ============${NC}"
+echo -e "${BLUE}=====================================================${NC}"
 echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
 echo
 
-read -p "MÃ¶chtest du die Installation von FiveM mit TxAdmin starten? (ja/nein): " choice
+read -p "Möchtest du die Installation von FiveM mit TxAdmin starten? (ja/nein): " choice
 
 if [[ "$choice" != "ja" ]]; then
     echo -e "${GREEN}Installation abgebrochen.${NC}"
     exit 0
 fi
 
-echo -e "${YELLOW}Aktualisiere Paketliste und installiere benÃ¶tigte Pakete...${NC}"
+echo -e "${YELLOW}Aktualisiere Paketliste und installiere benÃƒÂ¶tigte Pakete...${NC}"
 apt update
 apt upgrade -y
 apt-get install -y xz-utils git screen
