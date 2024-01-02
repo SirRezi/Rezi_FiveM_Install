@@ -37,19 +37,9 @@ check_for_update() {
         fi
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
-        countdown 5
+        sleep 5
         clear || printf "\033c"
     fi
-}
-
-countdown() {
-    secs=$1
-    while [ $secs -gt 0 ]; do
-        echo -ne "${YELLOW}Die Konsole wird in $secs Sekunden gelöscht.${NC}\033[0K\r"
-        sleep 1
-        : $((secs--))
-    done
-    echo -e "${YELLOW}Die Konsole wird gelöscht.${NC}"
 }
 
 run_installer() {
@@ -88,21 +78,19 @@ run_installer() {
     echo -e "${GREEN}============ Installation ist fertig ================${NC}"
     echo -e "${BLUE}=====================================================${NC}"
     echo
-    countdown 5
+    sleep 5
     clear || printf "\033c"
 }
 
-# Löscht die Konsole sofort beim Starten des Skripts
 clear || printf "\033c"
 
-# Hier wird nur nach einem Update gesucht, wenn eine neue Version verfügbar ist
-local_version=$(<"$script" grep -m 1 'Version: ' | awk '{print $2}')
-latest_version=$(curl -s "https://api.github.com/repos/$repo/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+local_version=$(<"ReziInstall.sh" grep -m 1 'Version: ' | awk '{print $2}')
+latest_version=$(curl -s "https://api.github.com/repos/SirRezi/Rezi_FiveM_Install/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 if [ "$local_version" != "$latest_version" ]; then
     check_for_update
 else
     echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
-    countdown 5
+    sleep 5
     clear || printf "\033c"
 fi
 
