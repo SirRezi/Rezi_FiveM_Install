@@ -11,8 +11,7 @@ update_script() {
     script="ReziInstall.sh"
     curl -sLO "https://raw.githubusercontent.com/$repo/main/$script"
     chmod +x $script
-    ./$script  # Führe das aktualisierte Skript aus
-    exit 0
+    echo -e "${YELLOW}Update erfolgreich durchgeführt.${NC}"
 }
 
 check_for_update() {
@@ -22,9 +21,13 @@ check_for_update() {
     local_version=$(<"$script" grep -m 1 'Version: ' | awk '{print $2}')
     latest_version=$(curl -s "https://api.github.com/repos/$repo/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [ "$local_version" != "$latest_version" ]; then
-        echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
-        sleep 3
-        update_script
+        echo -e "${YELLOW}Eine neue Version ist verfügbar.${NC}"
+        read -p "Möchtest du das Update herunterladen? (ja/nein): " update_choice
+        if [[ "$update_choice" == "ja" ]]; then
+            update_script
+        else
+            echo -e "${YELLOW}Update abgebrochen.${NC}"
+        fi
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
     fi
