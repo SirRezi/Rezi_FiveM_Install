@@ -21,19 +21,16 @@ check_for_update() {
     local_version=$(<$script grep -m 1 'Version: ' | awk '{print $2}')
     latest_version=$(curl -s "https://api.github.com/repos/$repo/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     if [ "$local_version" != "$latest_version" ]; then
-        read -p "Es ist eine neue Version verfügbar. Möchtest du das Update durchführen? (ja/nein): " update_choice
-        if [[ "$update_choice" == "ja" ]]; then
-            echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
-            sleep 3
-            update_script
-        else
-            echo -e "${YELLOW}Du hast das Update abgelehnt. Das Skript ist auf dem neuesten Stand.${NC}"
-            exit 0 # Hier wird das Skript beendet, wenn ein Update abgelehnt wird
-        fi
+        echo -e "${YELLOW}Eine neue Version wird installiert.${NC}"
+        sleep 3
+        update_script
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
     fi
 }
+
+check_for_update
+
 
 echo -e "${YELLOW}=====================================================${NC}"
 echo -e "${YELLOW}============ FiveM mit TxAdmin Installer ============${NC}"
