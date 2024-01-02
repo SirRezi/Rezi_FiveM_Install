@@ -1,7 +1,7 @@
 #!/bin/bash
 
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
@@ -15,6 +15,13 @@ update_script() {
 }
 
 check_for_update() {
+    clear || printf "\033c"
+    echo -e "${BLUE}=====================================================${NC}"
+    echo -e "${BLUE}============= FiveM mit TxAdmin Installer ===========${NC}"
+    echo -e "${BLUE}=====================================================${NC}"
+    echo -e "${GREEN}Dieses Skript wurde von SirRezi erstellt.${NC}"
+    echo
+
     echo -e "${YELLOW}Überprüfe auf Updates...${NC}"
     repo="SirRezi/Rezi_FiveM_Install"
     script="ReziInstall.sh"
@@ -30,14 +37,27 @@ check_for_update() {
         fi
     else
         echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
+        countdown 5
+        clear || printf "\033c"
     fi
 }
 
+countdown() {
+    secs=$1
+    while [ $secs -gt 0 ]; do
+        echo -ne "${YELLOW}Die Konsole wird in $secs Sekunden gelöscht.${NC}\033[0K\r"
+        sleep 1
+        : $((secs--))
+    done
+    echo -e "${YELLOW}Die Konsole wird gelöscht.${NC}"
+}
+
 run_installer() {
+    clear || printf "\033c"
     echo -e "${BLUE}=====================================================${NC}"
-    echo -e "${BLUE}============ FiveM mit TxAdmin Installer ============${NC}"
+    echo -e "${BLUE}============= FiveM mit TxAdmin Installer ===========${NC}"
     echo -e "${BLUE}=====================================================${NC}"
-    echo -e "${YELLOW}Dieses Skript wurde von SirRezi erstellt.${NC}"
+    echo -e "${GREEN}Dieses Skript wurde von SirRezi erstellt.${NC}"
     echo
 
     read -p "Möchtest du die Installation von FiveM mit TxAdmin starten? (ja/nein): " choice
@@ -64,11 +84,26 @@ run_installer() {
     cd /home/FiveM/server-data
     git clone https://github.com/citizenfx/cfx-server-data.git /home/FiveM/server-data
 
-    echo -e "${YELLOW}=====================================================${NC}"
-    echo -e "${YELLOW}============ Installation ist fertig ================${NC}"
-    echo -e "${YELLOW}=====================================================${NC}"
+    echo -e "${BLUE}=====================================================${NC}"
+    echo -e "${GREEN}============ Installation ist fertig ================${NC}"
+    echo -e "${BLUE}=====================================================${NC}"
     echo
+    countdown 5
+    clear || printf "\033c"
 }
 
-check_for_update
+# Löscht die Konsole sofort beim Starten des Skripts
+clear || printf "\033c"
+
+# Hier wird nur nach einem Update gesucht, wenn eine neue Version verfügbar ist
+local_version=$(<"$script" grep -m 1 'Version: ' | awk '{print $2}')
+latest_version=$(curl -s "https://api.github.com/repos/$repo/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+if [ "$local_version" != "$latest_version" ]; then
+    check_for_update
+else
+    echo -e "${YELLOW}Das Skript ist auf dem neuesten Stand.${NC}"
+    countdown 5
+    clear || printf "\033c"
+fi
+
 run_installer
